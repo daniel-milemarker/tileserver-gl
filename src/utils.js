@@ -6,7 +6,6 @@ import fs from 'node:fs';
 import clone from 'clone';
 import { combine } from '@jsse/pbfont';
 import { existsP } from './promises.js';
-import { url } from 'inspector';
 
 /**
  * Restrict user input to an allowed set of options.
