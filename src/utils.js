@@ -6,6 +6,7 @@ import fs from 'node:fs';
 import clone from 'clone';
 import { combine } from '@jsse/pbfont';
 import { existsP } from './promises.js';
+import { url } from 'inspector';
 
 /**
  * Restrict user input to an allowed set of options.
@@ -127,11 +128,10 @@ export const getTileUrls = (
 
   const uris = [];
   if (!publicUrl) {
-    let xForwardedPort = req.get('X-Forwarded-Port');
     let xForwardedPath = `${req.get('X-Forwarded-Path') ? '/' + req.get('X-Forwarded-Path') : ''}`;
     for (const domain of domains) {
       uris.push(
-        `${req.protocol}://${domain}:${xForwardedPort}${xForwardedPath}/${path}/${tileParams}.${format}${query}`,
+        `${req.protocol}://${domain}${xForwardedPath}/${path}/${tileParams}.${format}${query}`,
       );
     }
   } else {
